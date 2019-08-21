@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kgc.dao.TransactionrecordMapper">
+    <insert id="addTrans">
+        INSERT INTO transactionrecord(cardno, transactionDate, transactionAmount, balance, transactionType, remark)
+         VALUES (#{cardno},now(),#{transactionamount},#{balance},#{transactiontype},#{remark})
+    </insert>
+
+    <select id="queryByPageInfo" resultType="com.kgc.pojo.Transactionrecord">
+        SELECT * FROM  transactionrecord WHERE transactionDate BETWEEN #{start} AND #{end}
+        limit #{startRow},#{pageSize}
+    </select>
+
+    <select id="queryCountByPageInfo" resultType="int">
+         SELECT count(1) FROM  transactionrecord WHERE transactionDate BETWEEN #{start} AND #{end}
+    </select>
+</mapper>

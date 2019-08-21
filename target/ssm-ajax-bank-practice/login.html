@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+     <form style="width: 40%;height: 185px ;margin: 0px auto;text-align: center;background: yellowgreen">
+        <table style=" margin-left: 50px;">
+            <h1>个人网上银行</h1>
+            <tr>
+                <td>卡号：<input  type="text" id="cardNo" name="cardNo"></td>
+                <td id="errCardNo"></td>
+            </tr>
+            <tr>
+                <td>密码：<input  type="password" id="pwd" name="pwd"></td>
+                <td id="errPwd"></td>
+            </tr>
+            <tr>
+                <td><input  type="button" id="btn" value="登录个人网上银行"></td>
+            </tr>
+            <tr>
+                <td id="errMes"></td>
+            </tr>
+        </table>
+     </form>
+</body>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script>
+    $(function () {
+        $("#btn").click(function () {
+           var cardNo=$("#cardNo").val();
+           var pwd=$("#pwd").val();
+           if(cardNo!=""&&pwd!=""){
+               var regCardNo=/^[0-9]{16}$/;
+               var regPwd=/^[0-9]{6}$/;
+               if(regCardNo.test(cardNo)&&regPwd.test(pwd)){
+                   //ajax交互
+                   $.ajax({
+                       url:"login.do",
+                       type:"post",
+                       data:{"cardNo":cardNo,"pwd":pwd},
+                       dataType:"text",
+                       success:function (mes) {
+                           if(mes.trim()=="loginOk"){
+                                   window.location="bank.html?accNo="+cardNo;
+                           }else {
+                              $("#errMes").html(mes).css("color","red");
+                           }
+                       },
+                       error:function () {
+                             console.log("login.do error。。。")
+                       }
+                   })
+               }else if(!regCardNo.test(cardNo)){
+                   $("#errCardNo").html("卡号必须为16位数字！").css("color","red");
+               }else if(!regPwd.test(pwd)){
+                   $("#errPwd").html("密码必须为6位数字！").css("color","red");
+               }
+           }else if(cardNo==""){
+              $("#errCardNo").html("卡号不能为空！").css("color","red");
+           }else if(pwd==""){
+              $("#errPwd").html("密码不能为空！").css("color","red");
+           }
+        });
+    });
+</script>
+</html>

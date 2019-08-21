@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link type="text/css"  rel="stylesheet"  href="css/bank.css"/>
+</head>
+<body>
+
+      <div id="nav">
+          <p>卡号：<span id="accNo"></span>
+              <a href="javascript:if(confirm('确定要退出网上银行吗？')){location='login.html'}">退出登录</a>
+          </p>
+      </div>
+
+       <div id="content">
+           <div id="content_left">
+            <ul>
+                <li><a href="javascript:;" id="searchBalance">查询余额</a></li>
+                <li><a href="javascript:;" id="transferBalance">转账</a></li>
+                <li><a href="javascript:;" id="serachTrans">查询交易记录</a></li>
+                <li><a href="javascript:;" id="updaPwd">修改密码</a></li>
+            </ul>
+           </div>
+           <div id="content_rignt">
+            <h1 id="welcome">欢迎使用个人网上银行</h1>
+
+           </div>
+
+
+</body>
+<script type="text/javascript" src="js/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="js/bank.js"></script>
+
+</html>
